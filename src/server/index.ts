@@ -1,22 +1,7 @@
 import 'reflect-metadata'
-import { Arg, buildSchema, Field, ObjectType, Query, Resolver } from 'type-graphql'
+import { buildSchema } from 'type-graphql'
 import { ApolloServer } from 'apollo-server'
-
-@ObjectType()
-class UserSchema {
-  @Field()
-  name: string
-}
-
-@Resolver(() => UserSchema)
-class UserResolver {
-  @Query(() => UserSchema)
-  user (
-    @Arg('name', { nullable: true }) name: string
-  ): UserSchema {
-    return { name: name || 'Rafael' }
-  }
-}
+import { UserResolver } from '../resolvers/user-resolver'
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async function main () {
