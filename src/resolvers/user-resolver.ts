@@ -1,13 +1,24 @@
-import { Arg, Query, Resolver } from 'type-graphql'
+import { PrismaClient } from '@prisma/client'
+import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { UserCreateInput } from '../inputs/user'
 import { UserSchema } from '../schemas/user-schema'
-import { UserRole, UserStatus } from '../shared/enums'
 
 @Resolver(() => UserSchema)
 export class UserResolver {
-  @Query(() => UserSchema)
-  user (
-    @Arg('name', { nullable: true }) name: string
-  ): UserSchema {
-    return { name: 'Rafael', email: 'rafael@mail.com', status: UserStatus.active, role: UserRole.admin, id: 'id' }
+  constructor (private readonly prisma_client = new PrismaClient()) {
+
+  }
+
+  @Query(() => [UserSchema])
+  async user (): Promise<UserSchema[]> {
+    return await this.prisma_client.user.findMany()
+  }
+
+  @Mutation(() => UserSchema)
+  async userCreate (
+    @Arg('fields') fields: UserCreateInput
+  ): Promise<UserSchema> {
+    const newUser = await this.prisma_client.user.create({ data: fields })
+    return newUser
   }
 }

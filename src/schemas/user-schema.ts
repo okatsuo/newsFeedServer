@@ -1,5 +1,4 @@
 import { Field, ObjectType } from 'type-graphql'
-import { UserRole, UserStatus } from '../shared/enums'
 
 @ObjectType()
 export class UserSchema {
@@ -13,8 +12,8 @@ export class UserSchema {
   email: string
 
   @Field()
-  status: UserStatus
+  status: string
 
   @Field()
-  role: UserRole
+  role: string
 }
