@@ -11,3 +11,5 @@ export const userCreate = async (fields: UserCreateInput): Promise<User> => {
 }
 
 export const userByEmail = async (email: string): Promise<User | null> => await prismaClient.user.findUnique({ where: { email } })
+
+export const userById = async (id: string): Promise<User | null> => await prismaClient.user.findUnique({ where: { id } })
