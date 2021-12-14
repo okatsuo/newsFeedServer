@@ -1,7 +1,8 @@
 import { UserCreateInput } from '../../inputs/user'
+import { userCreateRepository } from '../../repository'
 import { UserSchema } from '../../schemas/user-schema'
-import { prismaClient } from '../../shared/prisma'
 
 export const userCreate = async (fields: UserCreateInput): Promise<UserSchema> => {
-  return await prismaClient.user.create({ data: fields })
+  const newUser: UserSchema = await userCreateRepository(fields)
+  return newUser
 }
