@@ -6,7 +6,7 @@ import * as UserService from '../service/user'
 @Resolver(() => UserSchema)
 export class UserResolver {
   @Query(() => [UserSchema])
-  async user (): Promise<UserSchema[]> {
+  async users (): Promise<UserSchema[]> {
     return await UserService.usersService()
   }
 
