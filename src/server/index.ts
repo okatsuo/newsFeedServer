@@ -5,11 +5,12 @@ import { ApolloServer } from 'apollo-server'
 import { UserResolver } from '../resolvers/user-resolver'
 import { appConfig } from '../shared/config'
 import { authChecker } from '../shared/middleware'
+import { PostResolver } from '../resolvers/post-resolver'
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async function main () {
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, PostResolver],
     authChecker
   })
   const server = new ApolloServer({
