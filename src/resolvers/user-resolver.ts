@@ -9,7 +9,7 @@ export class UserResolver {
   @Authorized('admin')
   @Query(() => [UserSchema])
   async users (): Promise<UserSchema[]> {
-    return await UserService.usersService()
+    return await UserService.users()
   }
 
   @Query(() => UserAuthenticationSchema)
@@ -17,7 +17,7 @@ export class UserResolver {
     @Arg('email') email: string,
       @Arg('password') password: string
   ): Promise<UserAuthenticationSchema> {
-    return await UserService.UserAuthenticationService(email, password)
+    return await UserService.UserAuthentication(email, password)
   }
 
   @Mutation(() => UserSchema)
