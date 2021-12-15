@@ -5,6 +5,8 @@
   "author": "okatsuo <rafael.goncanna@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "yarn prisma generate && yarn tsc",
+    "start": "yarn build && node dist/server/index.js",
     "dev": "ts-node-dev --respawn src/server/index.ts"
   },
   "devDependencies": {
