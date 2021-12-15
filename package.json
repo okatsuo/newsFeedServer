@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn prisma generate && yarn tsc",
-    "start": "yarn build && node dist/server/index.js",
-    "dev": "yarn build && ts-node-dev --poll --respawn src/server/index.ts "
+    "prod": "yarn build && node dist/server/index.js",
+    "dev": "yarn build && ts-node-dev --poll --respawn src/server/index.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
