@@ -9,3 +9,5 @@ services:
     volumes:
       - .:/usr/app
       - /usr/app/node_modules/
+
+# docker exec -it <container-id> //bin//sh
