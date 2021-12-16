@@ -7,11 +7,12 @@
   "scripts": {
     "build": "yarn prisma generate && yarn tsc",
     "prod": "yarn build && node dist/server/index.js",
-    "dev": "yarn build && ts-node-dev --poll --respawn src/server/index.ts"
+    "dev": "yarn build && ts-node-dev --poll --respawn src/server/index.ts",
+    "upload": "ts-node-dev src/shared/upload-file/index.ts"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/jsonwebtoken": "^8.5.6",
+    "@types/bcrypt": "5.0.0",
+    "@types/jsonwebtoken": "8.5.6",
     "@types/node": "16.11.12",
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "eslint": "7.12.1",
@@ -26,15 +27,14 @@
   "dependencies": {
     "@prisma/client": "3.6.0",
     "apollo-server": "3.5.0",
-    "bcrypt": "^5.0.1",
+    "bcrypt": "5.0.1",
     "class-validator": "0.13.2",
-    "dotenv": "^10.0.0",
-    "firebase-admin": "^10.0.1",
+    "dotenv": "10.0.0",
+    "firebase-admin": "10.0.1",
     "graphql": "15.3.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "8.5.1",
     "prisma": "3.6.0",
     "reflect-metadata": "0.1.13",
-    "type-graphql": "1.1.1",
-    "uuid": "^8.3.2"
+    "type-graphql": "1.1.1"
   }
 }

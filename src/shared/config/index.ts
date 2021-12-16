@@ -3,3 +3,7 @@ export const appConfig = {
   secretKey: process.env.SECRET_KEY || 'secret',
   expireToken: Number(process.env.TOKEN_EXPIRE) * 60 || '1h'
 }
+
+export const appStorage = {
+  bucket: process.env.CLOUD_BUCKET
+}
