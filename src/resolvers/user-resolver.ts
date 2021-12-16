@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { UserCreateInput } from '../inputs/user'
 import { UserAuthenticationSchema } from '../schemas/user-authentication'
@@ -8,7 +9,7 @@ import * as UserService from '../service/user'
 export class UserResolver {
   @Authorized('admin')
   @Query(() => [UserSchema])
-  async users (): Promise<UserSchema[]> {
+  async users (): Promise<User[]> {
     return await UserService.users()
   }
 
@@ -23,7 +24,7 @@ export class UserResolver {
   @Mutation(() => UserSchema)
   async userCreate (
     @Arg('fields') fields: UserCreateInput
-  ): Promise<UserSchema> {
+  ): Promise<User> {
     return await UserService.userCreate(fields)
   }
 }

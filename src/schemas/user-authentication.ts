@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 import { Field, ObjectType } from 'type-graphql'
 import { UserSchema } from './user-schema'
 
@@ -7,5 +8,5 @@ export class UserAuthenticationSchema {
   token: string
 
   @Field(() => UserSchema)
-  user: UserSchema
+  user: User
 }
