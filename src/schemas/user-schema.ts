@@ -1,5 +1,7 @@
+import { Post } from '@prisma/client'
 import { Field, ObjectType } from 'type-graphql'
 import { UserRole, UserStatus } from '../shared/enum'
+import { PostSchema } from './post-schema'
 
 @ObjectType()
 export class UserSchema {
@@ -17,6 +19,9 @@ export class UserSchema {
 
   @Field()
   role: UserRole
+
+  @Field(() => [PostSchema])
+  posts: Post[]
 
   @Field()
   created_at: Date
