@@ -24,8 +24,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=123456789
-    logging:
-      driver: none
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
 # docker exec -it <container-id> //bin//sh
