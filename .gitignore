@@ -1,6 +1,7 @@
 node_modules
 prisma/sqlite
 .env
+.env.docker
 dist
 data
 newsfeed-firebase.json

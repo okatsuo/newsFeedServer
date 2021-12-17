@@ -1,13 +1,31 @@
-version: '3'
+version: '3.7'
 
 services:
   app:
     build: .
     container_name: news-feed-server
+    env_file:
+      - .env.docker
     ports:
       - 5566:5566
     volumes:
       - .:/usr/app
       - /usr/app/node_modules/bcrypt
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./data:/usr/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=123456789
+    logging:
+      driver: none
 
 # docker exec -it <container-id> //bin//sh
