@@ -9,8 +9,7 @@ import { graphqlUploadExpress } from 'graphql-upload'
 import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-(async function main () {
+void (async function main () {
   const schema = await buildSchema({
     resolvers: [UserResolver, PostResolver],
     authChecker
