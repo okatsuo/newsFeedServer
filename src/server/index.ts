@@ -1,11 +1,13 @@
 import 'reflect-metadata'
 import 'dotenv/config'
 import { buildSchema } from 'type-graphql'
-import { ApolloServer } from 'apollo-server'
 import { UserResolver } from '../resolvers/user-resolver'
 import { appConfig } from '../shared/config'
 import { authChecker } from '../shared/middleware'
 import { PostResolver } from '../resolvers/post-resolver'
+import { graphqlUploadExpress } from 'graphql-upload'
+import { ApolloServer } from 'apollo-server-express'
+import express from 'express'
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async function main () {
@@ -13,6 +15,7 @@ import { PostResolver } from '../resolvers/post-resolver'
     resolvers: [UserResolver, PostResolver],
     authChecker
   })
+
   const server = new ApolloServer({
     schema,
     context: ({ req }) => {
@@ -22,6 +25,14 @@ import { PostResolver } from '../resolvers/post-resolver'
       return context
     }
   })
-  const { url } = await server.listen(appConfig.serverPort)
-  console.log(`server running at ${url}`)
+
+  await server.start()
+  const app = express()
+  app.use(graphqlUploadExpress())
+  server.applyMiddleware({ app })
+
+  const { serverPort } = appConfig
+  app.listen({ port: serverPort })
+
+  console.log(`Server ready at http://localhost:${serverPort}${server.graphqlPath}`)
 })()
