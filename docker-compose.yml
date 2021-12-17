@@ -8,6 +8,6 @@ services:
       - 5566:5566
     volumes:
       - .:/usr/app
-      - /usr/app/node_modules/
+      - /usr/app/node_modules/bcrypt
 
 # docker exec -it <container-id> //bin//sh
