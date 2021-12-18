@@ -3,6 +3,7 @@ import { Arg, Authorized, FieldResolver, Mutation, Query, Resolver, Root } from 
 import { PostCreateInput } from '../inputs'
 import { PostSchema } from '../schemas/post-schema'
 import { prismaClient } from '../shared/prisma'
+import { uploadFile } from '../shared/upload-file'
 
 @Resolver(() => PostSchema)
 export class PostResolver {
@@ -22,6 +23,12 @@ export class PostResolver {
   async postCreate (
     @Arg('fields') fields: PostCreateInput
   ): Promise<Post> {
-    return await prismaClient.post.create({ data: fields })
+    let imageUrl
+    const { image, ...postFields } = fields
+    if (image) {
+      imageUrl = await uploadFile('postImage', image)
+      console.log('image:', imageUrl)
+    }
+    return await prismaClient.post.create({ data: postFields })
   }
 }
