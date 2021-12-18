@@ -12,3 +12,15 @@ export class PostCreateInput {
   @Field()
   userId: string
 }
+
+@InputType()
+export class PostCreateInputWithImageUrl {
+  @Field()
+  text: string
+
+  @Field({ nullable: true })
+  imageUrl?: string
+
+  @Field()
+  userId: string
+}

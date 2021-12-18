@@ -1,8 +1,9 @@
-import firebaseAdmin from 'firebase-admin'
-import path from 'path'
-import { appStorage } from '../config'
 import 'dotenv/config'
 import { FileUpload } from 'graphql-upload'
+import firebaseAdmin from 'firebase-admin'
+import path from 'path'
+
+import { appStorage } from '../../shared/config'
 
 const admin = firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(path.join(__dirname, '../../../newsfeed-firebase.json'))

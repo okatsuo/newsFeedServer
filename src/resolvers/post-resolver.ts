@@ -1,9 +1,10 @@
-import { Post, User } from '@prisma/client'
 import { Arg, Authorized, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql'
-import { PostCreateInput } from '../inputs'
+import { Post, User } from '@prisma/client'
+
 import { PostSchema } from '../schemas/post-schema'
 import { prismaClient } from '../shared/prisma'
-import { uploadFile } from '../shared/upload-file'
+import * as PostService from '../service/post'
+import { PostCreateInput } from '../inputs'
 
 @Resolver(() => PostSchema)
 export class PostResolver {
@@ -15,7 +16,7 @@ export class PostResolver {
   @Authorized()
   @Query(() => [PostSchema])
   async posts (): Promise<Post[]> {
-    return await prismaClient.post.findMany()
+    return await PostService.posts()
   }
 
   @Authorized()
@@ -23,8 +24,6 @@ export class PostResolver {
   async postCreate (
     @Arg('fields') fields: PostCreateInput
   ): Promise<Post> {
-    const { image, ...postFields } = fields
-    const imageUrl = image ? await uploadFile('postImage', image) as string : undefined
-    return await prismaClient.post.create({ data: { ...postFields, imageUrl } })
+    return await PostService.postaCreate(fields)
   }
 }
