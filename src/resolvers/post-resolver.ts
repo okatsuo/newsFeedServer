@@ -23,12 +23,8 @@ export class PostResolver {
   async postCreate (
     @Arg('fields') fields: PostCreateInput
   ): Promise<Post> {
-    let imageUrl
     const { image, ...postFields } = fields
-    if (image) {
-      imageUrl = await uploadFile('postImage', image)
-      console.log('image:', imageUrl)
-    }
-    return await prismaClient.post.create({ data: postFields })
+    const imageUrl = image ? await uploadFile('postImage', image) as string : undefined
+    return await prismaClient.post.create({ data: { ...postFields, imageUrl } })
   }
 }

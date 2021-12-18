@@ -9,6 +9,9 @@ export class PostSchema {
   @Field()
   text: string
 
+  @Field({ nullable: true })
+  imageUrl?: string
+
   @Field()
   created_at: Date
 
