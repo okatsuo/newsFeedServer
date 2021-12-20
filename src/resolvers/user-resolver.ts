@@ -14,6 +14,14 @@ export class UserResolver {
 
   @Authorized()
   @Query(() => UserSchema, { nullable: true })
+  async userProfile (
+    @Arg('userToken') userToken: string
+  ): Promise<User | null> {
+    return await UserService.userProfile(userToken)
+  }
+
+  @Authorized()
+  @Query(() => UserSchema, { nullable: true })
   async user (
     @Arg('id') id: string
   ): Promise<User | null> {
