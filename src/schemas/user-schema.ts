@@ -23,6 +23,9 @@ export class UserSchema {
   @Field(() => [PostSchema])
   posts: Post[]
 
+  @Field({ nullable: true })
+  picture: string
+
   @Field()
   created_at: Date
 
