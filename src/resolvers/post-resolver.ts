@@ -26,4 +26,12 @@ export class PostResolver {
   ): Promise<Post> {
     return await PostService.postaCreate(fields)
   }
+
+  @Authorized()
+  @Mutation(() => PostSchema)
+  async postDelete (
+    @Arg('postId') postId: string
+  ): Promise<Post> {
+    return await PostService.postDelete(postId)
+  }
 }
