@@ -7,13 +7,14 @@
   "scripts": {
     "build": "yarn prisma generate && yarn tsc",
     "start": "yarn build && node dist/server/index.js",
-    "prod": "yarn build && node dist/server/index.js",
+    "test":"jest ---watch",
     "dev": "ts-node-dev --poll --respawn src/server/index.ts",
     "upload": "ts-node-dev src/shared/upload-file/index.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
     "@types/graphql-upload": "^8.0.7",
+    "@types/jest": "^27.0.3",
     "@types/jsonwebtoken": "8.5.6",
     "@types/node": "16.11.12",
     "@typescript-eslint/eslint-plugin": "4.0.1",
@@ -23,6 +24,8 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.0.0",
     "git-commit-msg-linter": "3.2.8",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.2",
     "ts-node-dev": "1.1.8",
     "typescript": "4.5.3"
   },
