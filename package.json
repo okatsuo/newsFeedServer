@@ -5,7 +5,7 @@
   "author": "okatsuo <rafael.goncanna@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && yarn prisma generate && yarn tsc",
+    "build": "rimraf dist && yarn prisma generate && yarn tsc -p tsconfig-build.json",
     "start": "yarn build && node dist/server/index.js",
     "test": "jest ---watch",
     "dev": "ts-node-dev --poll --respawn src/server/index.ts",
