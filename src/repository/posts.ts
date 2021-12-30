@@ -5,7 +5,7 @@ import { prismaClient } from '../shared/prisma'
 
 export const postById = async (postId: string): Promise<Post | null> => await prismaClient.post.findUnique({ where: { id: postId } })
 
-export const postsByUserId = async (userId: string): Promise<Post[]> => await prismaClient.post.findMany({ where: { userId } })
+export const postsByUserId = async ({ userId }: Pick<Post, 'userId'>): Promise<Post[]> => await prismaClient.post.findMany({ where: { userId } })
 
 export const posts = async (): Promise<Post[]> => await prismaClient.post.findMany()
 

@@ -9,7 +9,7 @@ import * as UserService from '../service/user'
 export class UserResolver {
   @FieldResolver()
   async posts (@Root() user: User): Promise<Post[]> {
-    return await UserService.userPosts(user.id)
+    return await UserService.userPosts({ userId: user.id })
   }
 
   @Authorized()
