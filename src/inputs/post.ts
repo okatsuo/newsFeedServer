@@ -2,25 +2,21 @@ import { GraphQLUpload, FileUpload } from 'graphql-upload'
 import { Field, InputType } from 'type-graphql'
 
 @InputType()
-export class PostCreateInput {
+class PostCreateInputBase {
   @Field()
   text: string
-
-  @Field(() => GraphQLUpload, { nullable: true })
-  image?: Promise<FileUpload>
 
   @Field()
   userId: string
 }
 
 @InputType()
-export class PostCreateInputWithImageUrl {
-  @Field()
-  text: string
-
+export class PostCreateInput extends PostCreateInputBase {
+  @Field(() => GraphQLUpload, { nullable: true })
+  image?: Promise<FileUpload>
+}
+@InputType()
+export class PostCreateInputWithImageUrl extends PostCreateInputBase {
   @Field({ nullable: true })
   imageUrl?: string
-
-  @Field()
-  userId: string
 }
