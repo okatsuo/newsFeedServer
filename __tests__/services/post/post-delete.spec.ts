@@ -1,25 +1,19 @@
 import { Post, UserRole } from '@prisma/client'
-import * as Repository from '../../src/repository'
-import { postDelete } from '../../src/service/post/post-delete'
-import { loggedUser } from '../../src/shared/logged-user'
+import * as Repository from '../../../src/repository'
+import { postDelete } from '../../../src/service/post/post-delete'
+import { loggedUser } from '../../../src/shared/logged-user'
+import { mockedPostData } from '../../mocks/post-data'
 
-const fakePost: Post = {
-  id: 'valid_id',
-  userId: 'valid_userId',
-  imageUrl: 'valid_link',
-  text: 'valid_text',
-  created_at: new Date(),
-  updated_at: new Date()
-}
+const fakePost: Post = mockedPostData[0]
 
-jest.mock('../../src/shared/logged-user', () => ({
+jest.mock('../../../src/shared/logged-user', () => ({
   loggedUser: {
     userId: 'valid_userId',
     role: UserRole.admin
   }
 }))
 
-jest.mock('../../src/repository', () => ({
+jest.mock('../../../src/repository', () => ({
   postById: jest.fn(async (): Promise<Post | null> => await Promise.resolve(fakePost)),
   postDelete: jest.fn(async (): Promise<Post | null> => await Promise.resolve(fakePost))
 }))
