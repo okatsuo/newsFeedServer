@@ -8,7 +8,11 @@ jest.mock('../../../src/repository/posts', () => ({
   postsByUserId: jest.fn(async (): Promise<Post[]> => await Promise.resolve(mockedPostData))
 }))
 
-const makeSut = (): any => {
+type SutType = {
+  sut: {userPosts: typeof userPosts}
+}
+
+const makeSut = (): SutType => {
   const sut = { userPosts }
   return { sut }
 }
@@ -28,14 +32,14 @@ describe('User posts', () => {
 
   it('should return with correct values', async () => {
     const { sut } = makeSut()
-    const posts = await sut.userPosts(fakeUserId)
+    const posts = await sut.userPosts({ userId: fakeUserId })
     expect(posts).toEqual(mockedPostData)
   })
 
-  it('should should call repository only one time', async () => {
+  it('should call repository only one time', async () => {
     const { sut } = makeSut()
     const postsByUserIdSpy = jest.spyOn(Repository, 'postsByUserId')
-    await sut.userPosts(fakeUserId)
+    await sut.userPosts({ userId: fakeUserId })
     expect(postsByUserIdSpy).toBeCalledTimes(1)
   })
 
@@ -43,7 +47,7 @@ describe('User posts', () => {
     const { sut } = makeSut()
     jest.spyOn(Repository, 'postsByUserId')
       .mockRejectedValueOnce(new Error(mockedRejectError))
-    const posts = sut.userPosts(fakeUserId)
+    const posts = sut.userPosts({ userId: fakeUserId })
     await expect(posts).rejects.toThrow(mockedRejectError)
   })
 })
