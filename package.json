@@ -7,9 +7,9 @@
   "scripts": {
     "build": "rimraf dist && yarn prisma generate && yarn tsc -p tsconfig-build.json",
     "start": "yarn build && node dist/server/index.js",
-    "test": "jest ---watch",
     "dev": "ts-node-dev --poll --respawn src/server/index.ts",
-    "upload": "ts-node-dev src/shared/upload-file/index.ts"
+    "test": "jest ---watch",
+    "test:ci": "jest"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
@@ -24,6 +24,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.0.0",
     "git-commit-msg-linter": "3.2.8",
+    "husky": "^7.0.4",
     "jest": "^27.4.5",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.2",
