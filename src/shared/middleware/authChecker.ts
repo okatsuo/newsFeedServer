@@ -9,7 +9,6 @@ export const authChecker: AuthChecker<{authorization: string}> = async ({ contex
     if (!context.authorization) return false
 
     const accessTokenInfo = decodeAccessToken(context.authorization)
-    if (!accessTokenInfo?.userId) return false
 
     const user = await Repository.userById(accessTokenInfo.userId)
     if (!user) return false
