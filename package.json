@@ -9,7 +9,8 @@
     "start": "yarn build && node dist/server/index.js",
     "dev": "ts-node-dev --poll --respawn src/server/index.ts",
     "test": "jest ---watch",
-    "test:ci": "jest"
+    "test:ci": "jest",
+    "test:commit": "jest -o"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
