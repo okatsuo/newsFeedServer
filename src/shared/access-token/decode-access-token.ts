@@ -1,15 +1,12 @@
+import { User } from '@prisma/client'
 import { verify } from 'jsonwebtoken'
 import { appConfig } from '../config'
 
-interface decodeAccessTokenReturn {
-  userId: string
+export type IAccessToken = {
+  userId: User['id']
 }
 
-interface IAccessToken {
-  userId: string
-}
-
-export const decodeAccessToken = (token: string): decodeAccessTokenReturn => {
-  const accessTokenInfo = verify(token, appConfig.secretKey) as IAccessToken
-  return accessTokenInfo
+export const decodeAccessToken = (token: string): IAccessToken => {
+  const { userId } = verify(token, appConfig.secretKey) as IAccessToken
+  return { userId }
 }
